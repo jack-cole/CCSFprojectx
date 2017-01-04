@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Project X Add Club{% endblock %}
+
+{% block content %}
+	<h1>Add Club</h1>
+	<form action="/addclub/" method="post">
+
+		{% csrf_token %}
+    	{{ form }}
+
+		<input type="submit" value="OK">
+	</form>
+{% endblock %}
