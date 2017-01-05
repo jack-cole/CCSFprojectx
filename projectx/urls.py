@@ -27,7 +27,9 @@ urlpatterns = [
 	url(r'^index', RedirectView.as_view(pattern_name='index', permanent=False)),
 
 	url(r'^clubs/', views.listclubs, name='clubs'),
-	url(r'^addclub/', views.addclub, name='addclub'),
+	# Disabled. Will enable in the future when we can create a single use Auth Token.
+	# url(r'^addclub/', views.addclub, name='addclub'),
+	url(r'^editclub/', views.editclub, name='editclub'),
 
 	url(r'^thanks/', views.thanks, name='addclub'),
 

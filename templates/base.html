@@ -8,7 +8,17 @@
 	</head>
 	<body>
 		<p>
-			<a href="/">Home</a> | <a href="/clubs/">Club List</a> | <a href="/addclub/">Add Club</a>
+			<a href="/">Home</a> |
+			<a href="/clubs/">Club List</a> |
+			{% if user.is_active and user.is_authenticated %}
+				<a href="/editclub/">Edit Club</a> |
+			{% endif %}
+				{% if user.is_active and user.is_authenticated %}
+					<a href="/accounts/logout">Logout</a>
+				{% else %}
+					<a href="/accounts/login">Login</a>
+				{% endif %}
+			
 		</p>
 		{% block content %}{% endblock %}
 	</body>

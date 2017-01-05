@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Project X Edit Club{% endblock %}
+
+{% block content %}
+    <h1>Edit Club</h1>
+	{% for form in forms %}
+		<form action="/editclub/" method="post">
+			<h2>{{ form.name.value }}</h2>
+			{% csrf_token %}
+			{{ form.id.as_hidden }}
+			{{ form.name.label }} {{ form.name }} <br>
+			{{ form.website.label }} {{ form.website }}	<br>
+			{{ form.email.label }} {{ form.email }}	 <br>
+			{{ form.meeting_times.label }} {{ form.meeting_times }} <br>
+			<input type="submit" value="Update Club">
+		</form>
+	{% endfor %}
+{% endblock %}
