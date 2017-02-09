@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render
 from .forms import ClubForm, EditClubForm
-from .models import Club
+from .models import Club, User
 from django.db.models import Q
 
 def index(request):
@@ -13,6 +13,13 @@ def listclubs(request):
 	return render(request, 'clubs.html', {'clublist': clublist})
 
 def editclub(request):
+	
+	class ClubDataEntry():
+		form = None
+		president = None
+		treasurer = None
+		icc_rep = None
+		
 	if request.user.is_authenticated():
 		logged_in_user = request.user
 
@@ -34,22 +41,20 @@ def editclub(request):
 		forms = list()
 		for club in clubs:
 			club_data = {
-				'id' : club.id,
-				'name' : club.name,
-				'email' : club.email,
-				'website' : club.website,
-				'meeting_times' : club.meeting_times,
-				'president' : club.president,
-				'treasurer' : club.treasurer,
-				'icc_rep' : club.icc_rep,
+				'id': club.id,
+				'name': club.name,
+				'email': club.email,
+				'website': club.website,
+				'meeting_times': club.meeting_times,
+				'president': club.president,
+				'treasurer': club.treasurer,
+				'icc_rep': club.icc_rep,
 			}
 			form = EditClubForm(initial=club_data)
 			forms.append(form)
-			
-		
-		
-		
+
 		return render(request, 'editclub.html', {'user': logged_in_user, 'forms': forms})
+	
 	else:
 		return HttpResponseRedirect('/accounts/login/')
 	
